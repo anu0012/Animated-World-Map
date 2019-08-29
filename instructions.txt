@@ -1,0 +1,4 @@
+Instructions to run locally:
+
+1. Open Terminal
+2. Run 'python -m http.server'
