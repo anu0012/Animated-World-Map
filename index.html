@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Map Anime</title>
+  <script src="jquery-3.4.1.min.js"></script>
+  <script src="snap.svg.js"></script>
+  
+  <script type="text/javascript">
+  	var g,gr,src,dest,pln,flight;
+
+  	function getShift(dot) {
+        return "t" + (400 - dot.x) + "," + (300 - dot.y);
+    }
+  	window.onload = function () {
+            g = Snap();
+            g.attr({
+                viewBox: [0, 0, 1200, 1600]
+            });
+            
+            Snap.load("3d-isometric-international-map_v2 cop.svg", function (f) {
+                
+             	gr = f.select("g");
+                pln = f.select("#plane");
+                var top = g.g();
+                top.add(gr);
+      
+                pln = gr.g(pln, pln.clone());
+                pln.attr({
+                    display: "none"
+                });
+                pln[0].attr({
+                    stroke: "#fff",
+                    strokeWidth: 2
+                });
+                gr.attr({
+                    transform: getShift({
+                        x: 613.73,
+                        y: 403.23
+                    })
+                });
+                flight = gr.path().attr({
+                    fill: "none",
+                    stroke: "red",
+                    strokeWidth: 3,
+                    strokeDasharray: "5 3"
+                }).insertBefore(pln);
+               
+            });
+        };
+
+        function startAnimation(id){
+        	var pth = g.select('#flight'+id);
+
+        	pln.attr({
+                display: ""
+            });
+ 
+            var flag,
+                len = Snap.path.getTotalLength(pth.attr("d"));
+             console.log(len);
+            Snap.animate(0, len, function (l) {
+                g.attr({width: 100 + (flag = !flag ? 1e-5 : 0) + "%"});
+                var dot = pth.getPointAtLength(l);
+                flight.attr({
+                    d: pth.getSubpath(0, l)
+                });
+                pln.attr({
+                    transform: "t" + [dot.x, dot.y] +
+                               "r" + (dot.alpha - 90)
+                });
+                gr.attr({
+                    transform: getShift(dot)
+                });
+            }, 3000);
+        }
+ 
+  </script>
+</head>
+
+<body>
+	  <button id='1' onclick="startAnimation(this.id)">Start Flight 1</button>
+	  <button id='2' onclick="startAnimation(this.id)">Start Flight 2</button>
+	  <button id='3' onclick="startAnimation(this.id)">Start Flight 3</button>
+	  <button id='4' onclick="startAnimation(this.id)">Start Flight 4</button>
+	  <button id='5' onclick="startAnimation(this.id)">Start Flight 5</button>
+	  <button id='6' onclick="startAnimation(this.id)">Start Flight 6</button>
+	  <button id='7' onclick="startAnimation(this.id)">Start Flight 7</button>
+	  <button id='8' onclick="startAnimation(this.id)">Start Flight 8</button>
+	  <button id='9' onclick="startAnimation(this.id)">Start Flight 9</button>
+	  <button id='10' onclick="startAnimation(this.id)">Start Flight 10</button>
+
+	  <br>
+	  <br>
+	  <div id="drawing"></div>
+  	  
+</body>
+</html>
