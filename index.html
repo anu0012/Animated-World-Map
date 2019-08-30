@@ -18,39 +18,59 @@
                
                Snap.load("3d-isometric-international-map_v2 cop.svg", function (f) {
                    
-                   gr = f.select("g");
-                   pln = f.select("#plane");
-                   var top = g.g();
-                   top.add(gr);
-         
-                   pln = gr.g(pln, pln.clone());
-                   pln.attr({
-                       display: "none"
-                   });
-                   pln[0].attr({
-                       stroke: "#fff",
-                       strokeWidth: 2
-                   });
-                   gr.attr({
-                       transform: getShift({
-                           x: 613.73,
-                           y: 403.23
-                       })
-                   });
-                   flight = gr.path().attr({
-                       fill: "none",
-                       stroke: "red",
-                       strokeWidth: 3,
-                       strokeDasharray: "5 3"
-                   }).insertBefore(pln);
+	               gr = f.select("g");
+	               pln = f.select("#plane");
+	               var top = g.g();
+	               top.add(gr);
+	     
+	               pln = gr.g(pln, pln.clone());
+	               pln.attr({
+	                   display: "none"
+	               });
+	               pln[0].attr({
+	                   stroke: "#fff",
+	                   strokeWidth: 2
+	               });
+	               gr.attr({
+	                   transform: getShift({
+	                       x: 613.73,
+	                       y: 403.23
+	                   })
+	               });
+	               flight = gr.path().attr({
+	                   fill: "none",
+	                   stroke: "red",
+	                   strokeWidth: 3,
+	                   strokeDasharray: "5 3"
+	               }).insertBefore(pln);
                   
                });
            };
       
            function startAnimation(id){
-            var pth = g.select('#flight'+id);
-      
             pln.attr({
+                     display: "none"
+                 });
+            if(id == '1' || id == '3'){
+                pln = g.select('#rocket');
+            }
+            else if(id == '2' || id == '4' || id == '6'){
+                pln = g.select('#plane');
+            }
+            else if(id == '5'){
+                pln = g.select('#bus');
+            }
+            else{
+              pln = g.select('#ship');
+            }
+            pln = gr.g(pln, pln.clone());
+            pln[0].attr({
+                     stroke: "#fff",
+                     strokeWidth: 2
+                 });
+           	var pth = g.select('#flight'+id);
+      
+           	pln.attr({
                    display: ""
                });
       
