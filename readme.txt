@@ -6,7 +6,7 @@ Instructions to run locally:
 Instruction for Heroku App:
 
 Please wait till the image is completely loaded and visible on the web page.
-
+https://animation-map.herokuapp.com/
 
 Technology Used:
 
